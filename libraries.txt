@@ -1,0 +1,2 @@
+npm i express express-validator dotenv cors hpp xss-clean helmet jsonwebtoken bcryptjs express-rate-limit multer 
+npm i cors dotenv express express-rate-limit express-validator firebase helmet hpp morgan multer pg pg-hstore xss-clean
