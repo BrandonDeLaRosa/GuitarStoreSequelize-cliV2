@@ -8,6 +8,10 @@ const xss = require ('xss-clean');
 const ApiRoutes = require('./routes');
 // const {SchoolAdmin,Customers} = require ('./database/models');
 
+// !ERROR GRAMATICAL FOREING KEY Y CUANDO SE CREA UN FIELD EN MIGRACIONES, SE DEBE CREAR D ENUEVO EN MODELOS.
+
+
+
 
 //TODO Configuracion basica de la APP.
 

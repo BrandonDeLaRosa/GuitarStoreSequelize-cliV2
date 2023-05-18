@@ -42,12 +42,14 @@ module.exports = (sequelize, DataTypes) => {
     schoolAdminId: 
     {
       type:DataTypes.INTEGER,
-      allowNull:false
+      allowNull:false,
+      field: "school_admin_id"
     },
     teacherId: 
     {
       type:DataTypes.INTEGER,
-      allowNull:false
+      allowNull:false,
+      field: "teacher_id"
     },
   }, {
     sequelize,

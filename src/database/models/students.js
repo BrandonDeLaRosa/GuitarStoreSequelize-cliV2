@@ -11,7 +11,7 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       Students.belongsTo(models.SchoolAdmin,{foreignKey:"schoolAdminId"})
-      Students.hasMany(models.StudentsClasses, {foreingKey: 'studentsId'});
+      Students.hasMany(models.StudentsClasses, {foreignKey: 'studentsId'});
       Students.hasMany(models.StudentsTeachers, {foreignKey:'studentsId'});
     }
   }
@@ -43,7 +43,8 @@ module.exports = (sequelize, DataTypes) => {
     },
     schoolAdminId: {
       type:DataTypes.INTEGER,
-      allowNull:false
+      allowNull:false,
+      field:"school_admin_id"
     }
   }, {
     sequelize,

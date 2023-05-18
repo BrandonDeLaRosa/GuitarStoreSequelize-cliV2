@@ -11,10 +11,10 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       SchoolAdmin.hasMany(models.Teachers,{foreignKey: 'schoolAdminId'});
-      SchoolAdmin.hasMany(models.Students, {foreingKey:'schoolAdminId'});
-      SchoolAdmin.hasMany(models.Classes, {foreingKey: 'schoolAdminId'});
-      SchoolAdmin.hasMany(models.Sales, {foreingKey:   'schoolAdminId'});
-      SchoolAdmin.hasMany(models.Products, {foreingKey:'schoolAdminId'});
+      SchoolAdmin.hasMany(models.Students, {foreignKey:'schoolAdminId'});
+      SchoolAdmin.hasMany(models.Classes, {foreignKey: 'schoolAdminId'});
+      SchoolAdmin.hasMany(models.Sales, {foreignKey:   'schoolAdminId'});
+      SchoolAdmin.hasMany(models.Products, {foreignKey:'schoolAdminId'});
     }
   }
   SchoolAdmin.init({

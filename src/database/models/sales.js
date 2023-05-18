@@ -11,7 +11,7 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       Sales.belongsTo(models.SchoolAdmin,{ foreignKey: "schoolAdminId"});
-      Sales.hasMany(models.SalesProducts,{foreignKey: "saleId"})
+      Sales.hasMany(models.SalesProducts,{ foreignKey: "saleId"})
     }
   }
   Sales.init({
@@ -40,7 +40,8 @@ module.exports = (sequelize, DataTypes) => {
     },
     schoolAdminId: {
       type:DataTypes.INTEGER,
-      allowNull:false
+      allowNull:false,
+      field: "school_admin_id"
     },
   
   }, {

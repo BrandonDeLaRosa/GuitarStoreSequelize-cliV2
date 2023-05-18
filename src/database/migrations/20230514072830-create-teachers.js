@@ -17,6 +17,9 @@ module.exports = {
         type: Sequelize.STRING(25),
         allowNull:false
       },
+      location: {            //!  Tabla agregada con migracion, post modelo creado.
+        type:Sequelize.STRING,
+      },
       img:{
         type: Sequelize.STRING,
       },
