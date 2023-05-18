@@ -13,20 +13,21 @@ class ClassesServices {
         }
     }
 
+    
+        static async createNewClass(newClass){
+           
+            try {
+                const creating = await Classes.create(newClass)
+                return creating
+            } catch (error) {
+                throw(error)
+            }
+        }
+        
     static async getClass(id){
         try {
             const result = await Classes.findByPk(id)
             return result
-        } catch (error) {
-            throw(error)
-        }
-    }
-
-    static async createNewClass(newClass){
-       
-        try {
-            const creating = await Classes.create(newClass)
-            return creating
         } catch (error) {
             throw(error)
         }

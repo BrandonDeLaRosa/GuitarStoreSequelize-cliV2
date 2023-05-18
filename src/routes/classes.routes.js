@@ -7,7 +7,7 @@ const router = Router();
 router.post('/class', createNewClass);
 router.get('/classes', getAllClasses);
 
-router.route('/admin/:id')
+router.route('/class/:id')
 .get(getOneClass)
 .put(updateClass)
 .delete(deleteClass)

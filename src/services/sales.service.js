@@ -20,6 +20,37 @@ class SaleServices {
             throw(error)
         }
     }
+
+    static async getSale(id){
+        try {
+            const result = await Sales.findByPk(id)
+            return result
+        } catch (error) {
+            throw(error)
+        }
+    }
+
+    static async updateOneSale(id,saleBody){
+        try {
+            const updated = await Sales.update(saleBody,{
+                where: {id}
+            });
+            return updated
+        } catch (error) {
+            throw(error)
+        }
+    }
+
+    static async deleteOneSale(id){
+        try {
+            const deleted = await Sales.destroy({
+                where: {id}
+            })
+            return deleted
+        } catch (error) {
+            throw(error)
+        }
+    }
 };
 
 module.exports = SaleServices;

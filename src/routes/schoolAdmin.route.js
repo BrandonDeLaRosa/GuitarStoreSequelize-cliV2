@@ -4,7 +4,7 @@ const {getAllAdmin, createNewAdmin, getOneAdmin, updateAdmin, deleteAdmin} = req
 
 const router = Router() ;
 
-router.get('/admin', getAllAdmin);
+router.get('/admins', getAllAdmin);
 router.post('/admin', createNewAdmin);
 
 router.route('/admin/:id')

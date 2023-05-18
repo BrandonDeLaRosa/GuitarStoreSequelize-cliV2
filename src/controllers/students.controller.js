@@ -22,7 +22,41 @@ const createNewStudent = async (req,res,next) => {
     }
 }
 
+const getOneStudent = async (req,res,next) => {
+    try {
+        const {id} = req.params;
+        const result = await studentServices.getStudent(id);
+        res.status(201).json(result);
+    } catch (error) {
+        res.status(400).json(error)
+    }
+}
+
+const updateStudent = async (req,res,next) => {
+    try {
+        const {id} = req.params;
+        const studentBody = req.body;
+        const updatedStudent = await studentServices.updateOneStudent(id,studentBody);
+        res.status(201).json(updatedStudent)
+    } catch (error) {
+        res.status(400).json(error)
+    }
+}
+
+const deleteStudent = async (req,res,next) => {
+    try {
+        const {id} = req.params;
+        const deletedstudent = await studentServices.deleteOneStudent(id);
+        res.status(201).json(deletedstudent)
+    } catch (error) {
+        res.status(400).json(error)
+    }
+}
+
 module.exports = {
     getAllStudents,
-    createNewStudent
+    createNewStudent,
+    getOneStudent,
+    updateStudent,
+    deleteStudent
 }
