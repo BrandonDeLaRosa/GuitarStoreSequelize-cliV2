@@ -11,7 +11,7 @@ module.exports = {
       },
       firstname: {
         type: Sequelize.STRING(30),
-        allowNull:false
+        
       },
       lastname: {
         type: Sequelize.STRING(30),
@@ -19,7 +19,7 @@ module.exports = {
       },
       username: {
         type: Sequelize.STRING(30),
-        allowNull:false
+        // allowNull:false
       },
       email: {
         type: Sequelize.STRING(70),

@@ -35,10 +35,11 @@ const updateAdmin = async (req,res,next) => {
     try {
         const {id} = req.params;
         const adminBody = req.body;
-        const updatedAdmin = await SchoolAdminServices.updateOneAdmin(id,adminBody);
+        const updatedAdmin = await SchoolAdminServices.updateOneAdmin(id, adminBody);
         res.status(201).json(updatedAdmin)
     } catch (error) {
         res.status(400).json(error)
+        console.log(error);
     }
 }
 

@@ -25,14 +25,15 @@ module.exports = (sequelize, DataTypes) => {
       type:DataTypes.INTEGER,
     },
     firstname: {
-      type:DataTypes.STRING(30)
+      type:DataTypes.STRING(30),
+      allowNull:false
     },
     lastname: {
       allowNull:false,
       type: DataTypes.STRING(30)
     },
     username: {
-      allowNull:false,
+      // allowNull:false,
       type: DataTypes.STRING(30)
     },
     email: {
