@@ -31,10 +31,21 @@ const createSchoolAdminValidator = [
 ]
 
 const updateSchoolAdminValidator = [
-   param("id").exists().withMessage("The id must be provided(it must be a number)"),
+   param("id").isInt().withMessage("The id must be provided(it must be a number)"),
    check("email","The email cannot be changed")
         .not().exists(),
-   check("password","The password cannot be changed").not().exists(),
+   check("password","The password cannot be changed")
+        .not().exists(),
+    check("firstname", "Error in the field: FIRSTNAME.")
+        .exists().withMessage("firstname must exists.")
+        .notEmpty().withMessage("firstname must not be empty.")
+        .isString().withMessage("firstname must be text (string). ")
+        .isLength({min:3}).withMessage("firstname must have at least 3 characters."),
+    check("lastname", "Error in the field: LASTNAME.")
+        .exists().withMessage("lastname must exists.")
+        .notEmpty().withMessage("lastname must not be empty.")
+        .isString().withMessage("lastname must be text (string). ")
+        .isLength({min:3}).withMessage("lastname must have at least 3 characters."),     
    (req,res,next) =>{
     validateResult(req,res,next)
 }

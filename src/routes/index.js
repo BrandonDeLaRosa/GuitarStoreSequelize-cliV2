@@ -1,4 +1,4 @@
-const schoolAdminRoutes = require('./schoolAdmin.route');
+ const schoolAdminRoutes = require('./schoolAdmin.route');
 const classesRoutes = require('./classes.routes');
 const salesRoutes = require ('./sales.routes');
 const teachersRoutes = require ('./teachers.routes')
