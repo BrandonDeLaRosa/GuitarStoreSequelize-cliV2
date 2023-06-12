@@ -1,5 +1,6 @@
 const {Router} = require('express');
 const { getAllTeachers, createNewTeacher, getOneTeacher, updateTeacher, deleteTeacher } = require("../controllers/teachers.controller");
+// const { createTeacherValidator } = require('../validators/teacher.validator');
 
 
 

@@ -1,5 +1,6 @@
 const SchoolAdminServices = require('../services/schoolAdmin.service.js');
 
+
 const getAllAdmin = async (req,res,next) => {
     try {
         const schoolAdmin = await SchoolAdminServices.getSchoolAdmin();

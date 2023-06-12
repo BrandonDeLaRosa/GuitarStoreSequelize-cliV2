@@ -1,3 +1,5 @@
+const bcrypt = require('bcrypt')
+
 'use strict';
 const {
   Model
@@ -42,11 +44,22 @@ module.exports = (sequelize, DataTypes) => {
     },
     password: {
       allowNull:false,
-      type: DataTypes.STRING(30)
+      type: DataTypes.STRING()
     }
   }, {
     sequelize,
     modelName: 'SchoolAdmin',
+    hooks:{
+      beforeCreate: async (admin) => {
+        try {
+          const salt = await bcrypt.genSalt(10)
+          const passwordHash = await bcrypt.hash(admin.password, salt)
+          admin.password = passwordHash
+        } catch (error) {
+          throw error
+        }
+      }
+    }
   });
   return SchoolAdmin;
 };

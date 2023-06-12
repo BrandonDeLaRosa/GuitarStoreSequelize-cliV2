@@ -54,6 +54,19 @@ class SchoolAdminServices  {
             throw(error)
         }
     }
+
+    // todo AUTH login
+
+    static async getAdmin(username){
+        try {
+            const administrator = await SchoolAdmin.findOne({
+                where: {username}
+            })
+            return administrator
+        } catch (error) {
+            throw (error)
+        }
+    }
 };
 
 module.exports = SchoolAdminServices;
