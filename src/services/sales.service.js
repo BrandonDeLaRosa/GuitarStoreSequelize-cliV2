@@ -1,4 +1,5 @@
-const {Sales} = require('../database/models');
+const {Sales, salesproducts} = require('../database/models');
+// const salesproducts = require('../database/models/salesproducts');
 
 class SaleServices {
 
@@ -49,6 +50,17 @@ class SaleServices {
             return deleted
         } catch (error) {
             throw(error)
+        }
+    }
+
+    static async newSale(saleId,productId,quantity,price){
+        try {
+            const selling = await salesproducts.create(saleId,productId,quantity,price)
+            const total = price * quantity;
+            await Sales.increment({total}, {where: {id: saleId}})
+            return selling
+        } catch (error) {
+            throw error
         }
     }
 };

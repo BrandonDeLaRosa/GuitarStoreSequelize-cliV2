@@ -38,6 +38,11 @@ module.exports = (sequelize, DataTypes) => {
       type:DataTypes.TEXT,
       allowNull:false
     },
+    total: {
+      type:DataTypes.FLOAT,
+      allowNull:false,
+      defaultValue:0
+    },
     schoolAdminId: {
       type:DataTypes.INTEGER,
       allowNull:false,

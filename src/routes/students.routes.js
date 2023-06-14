@@ -12,4 +12,4 @@ router.route('/student/:id')
 .put(updateStudent)
 .delete(deleteStudent)
 
-module.exports = router;
+module.exports = router;  

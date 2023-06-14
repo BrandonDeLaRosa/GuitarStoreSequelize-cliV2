@@ -39,7 +39,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     img: {
       type:DataTypes.STRING,
-      allowNull:false
+      // allowNull:false
     },
     available: {
       type:DataTypes.BOOLEAN,

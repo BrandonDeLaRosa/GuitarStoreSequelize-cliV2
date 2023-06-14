@@ -1,3 +1,4 @@
+const {SalesProducts, Sales} = require('../database/models');
 const SaleServices = require('../services/sales.service');
 
 
@@ -53,10 +54,31 @@ const deleteSale = async (req,res,next) => {
     }
 }
 
+
+const addNewSale = async (req,res,next) => {
+    try {
+        const {saleId,productId,quantity,price} = req.body;
+        // await SaleServices.newSale(saleId,productId,quantity,price)
+        await SalesProducts.create({saleId,productId,quantity,price});
+        const total = price * quantity;
+        await Sales.increment({total}, {where: {id: saleId}})
+        res.status(201).json({
+            // sale,
+            message: "Producto agregado."
+        })
+    } catch (error) {
+        console.log(error); 
+        next(error)
+    }
+}
+
+
+
 module.exports = {
     getAllSales,
     createNewSale,
     getOneSale,
     updateSale,
-    deleteSale
+    deleteSale,
+    addNewSale
 }

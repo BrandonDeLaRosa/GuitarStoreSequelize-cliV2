@@ -1,5 +1,5 @@
 const {Router} = require('express');
-const { getAllSales, createNewSale, getOneSale, updateSale, deleteSale } = require('../controllers/sales.controller');
+const { getAllSales, createNewSale, getOneSale, updateSale, deleteSale, addNewSale } = require('../controllers/sales.controller');
 
 
 
@@ -7,7 +7,8 @@ const { getAllSales, createNewSale, getOneSale, updateSale, deleteSale } = requi
 const router = Router();
 
 router.get('/sales', getAllSales);
-router.post('/sales', createNewSale);
+router.post('/sale', createNewSale);
+router.post('/addProduct/sale', addNewSale);
 
 router.route('/sale/:id')
 .get(getOneSale)

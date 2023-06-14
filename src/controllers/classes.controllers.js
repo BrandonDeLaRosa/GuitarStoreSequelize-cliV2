@@ -1,7 +1,7 @@
 const ClassesServices = require('../services/classes.services');
+const { StudentsClasses } = require('../database/models')
 
-
-const getAllClasses = async (req,res,next) => {
+const getAllClasses = async (req, res, next) => {
     try {
         const classes = await ClassesServices.getClasses();
         res.status(201).json(classes)
@@ -11,19 +11,19 @@ const getAllClasses = async (req,res,next) => {
 }
 
 
-const createNewClass = async (req,res,next) => {
+const createNewClass = async (req, res, next) => {
     try {
         const newClass = req.body;
-        const create =await ClassesServices.createNewClass(newClass)
+        const create = await ClassesServices.createNewClass(newClass)
         res.status(201).json(create)
     } catch (error) {
         res.status(400).json(error)
     }
 }
 
-const getOneClass = async (req,res,next) => {
+const getOneClass = async (req, res, next) => {
     try {
-        const {id} = req.params;
+        const { id } = req.params;
         const result = await ClassesServices.getClass(id);
         res.status(201).json(result);
     } catch (error) {
@@ -31,24 +31,36 @@ const getOneClass = async (req,res,next) => {
     }
 }
 
-const updateClass = async (req,res,next) => {
+const updateClass = async (req, res, next) => {
     try {
-        const {id} = req.params;
+        const { id } = req.params;
         const classBody = req.body;
-        const updatedClass = await ClassesServices.updateOneClass(id,classBody);
+        const updatedClass = await ClassesServices.updateOneClass(id, classBody);
         res.status(201).json(updatedClass)
     } catch (error) {
         res.status(400).json(error)
     }
 }
 
-const deleteClass = async (req,res,next) => {
+const deleteClass = async (req, res, next) => {
     try {
-        const {id} = req.params;
+        const { id } = req.params;
         const deletedAdmin = await ClassesServices.deleteOneClass(id);
         res.status(201).json(deletedAdmin)
     } catch (error) {
         res.status(400).json(error)
+    }
+}
+
+const addStudent = async (req, res, next) => {
+    try {
+        const { studentsId, classesId } = req.body;
+        await StudentsClasses.create({ studentsId, classesId });
+        res.status(201).json({
+            message: "Estudiante agregado a la clase."
+        })
+    } catch (error) {
+        throw error
     }
 }
 module.exports = {
@@ -56,5 +68,6 @@ module.exports = {
     createNewClass,
     getOneClass,
     updateClass,
-    deleteClass
+    deleteClass,
+    addStudent
 }

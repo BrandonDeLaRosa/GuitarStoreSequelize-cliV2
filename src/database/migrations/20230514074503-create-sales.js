@@ -25,6 +25,11 @@ module.exports = {
         type: Sequelize.TEXT,
         allowNull:false
       },
+      total: {
+        type: Sequelize.FLOAT,
+        allowNull:false,
+        defaultValue:0
+      },
       schoolAdminId: {
         type: Sequelize.INTEGER,
         allowNull:false,
