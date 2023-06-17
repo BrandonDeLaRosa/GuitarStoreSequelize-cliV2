@@ -1,10 +1,31 @@
-const {Teachers} = require ('../database/models');
+const { Teachers } = require('../database/models');
+const { SchoolAdmin, StudentsTeachers, Students, Classes } = require('../database/models');
 
 
 class teacherServices {
-    static async teachersArray(){
+    static async teachersArray() {
         try {
-            const allTeachers = await Teachers.findAll();
+            const allTeachers = await Teachers.findAll(
+                {
+                    // attributes: { exclude: ['createdAt', 'updatedAt'] },
+                    include: [
+                        {
+                            model: SchoolAdmin,
+                            attributes: ['firstname', 'lastname', 'username']
+                        },
+                        {
+                            model: StudentsTeachers, include: [{
+                                model: Students,
+                                attributes: ['id', 'firstname', 'lastname'],
+                            }]
+                        },
+                        {
+                            model: Classes,
+                            attributes: ["id", "name", "description"],
+                        }
+                    ]
+                }
+            );
             return allTeachers
         } catch (error) {
             throw (error)
@@ -20,34 +41,53 @@ class teacherServices {
         }
     }
 
-    static async getTeacher(id){
+    static async getTeacher(id) {
         try {
-            const result = await Teachers.findByPk(id)
+            const result = await Teachers.findByPk(id,
+                {
+                    // attributes: { exclude: ['createdAt', 'updatedAt'] },
+                    include: [
+                        {
+                            model: SchoolAdmin,
+                            attributes: ['firstname', 'lastname', 'username']
+                        },
+                        {
+                            model: StudentsTeachers, include: [{
+                                model: Students,
+                                attributes: ['id', 'firstname', 'lastname'],
+                            }]
+                        },
+                        {
+                            model: Classes,
+                            attributes: ["id", "name", "description"],
+                        }
+                    ]
+                })
             return result
         } catch (error) {
-            throw(error)
+            throw (error)
         }
     }
 
-    static async updateOneTeacher(id,teacherBody){
+    static async updateOneTeacher(id, teacherBody) {
         try {
-            const updated = await Teachers.update(teacherBody,{
-                where: {id}
+            const updated = await Teachers.update(teacherBody, {
+                where: { id }
             });
             return updated
         } catch (error) {
-            throw(error)
+            throw (error)
         }
     }
 
-    static async deleteOneTeacher(id){
+    static async deleteOneTeacher(id) {
         try {
             const deleted = await Teachers.destroy({
-                where: {id}
+                where: { id }
             })
             return deleted
         } catch (error) {
-            throw(error)
+            throw (error)
         }
     }
 }

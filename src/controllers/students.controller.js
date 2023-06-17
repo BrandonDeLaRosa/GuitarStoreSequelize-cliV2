@@ -1,4 +1,6 @@
 const studentServices = require ('../services/students.service');
+const {StudentsTeachers} = require('../database/models')
+
 
 const getAllStudents = async (req,res,next) => {
     try {
@@ -53,10 +55,24 @@ const deleteStudent = async (req,res,next) => {
     }
 }
 
+const studentTeacherJoin = async (req,res,next) => {
+    try {
+        const {studentsId, teachersId} = req.body
+        await StudentsTeachers.create({studentsId,teachersId});
+        res.status(201).json({
+            message: "Student Teacher data created successfuly"
+        })
+    } catch (error) {
+        console.log(error);
+        res.status(400).json(erro)
+    }
+}
+
 module.exports = {
     getAllStudents,
     createNewStudent,
     getOneStudent,
     updateStudent,
-    deleteStudent
+    deleteStudent,
+    studentTeacherJoin
 }

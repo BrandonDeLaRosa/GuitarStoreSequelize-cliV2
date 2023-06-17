@@ -1,10 +1,31 @@
-const {Students} = require ('../database/models');
+// const {Students} = require ('../database/models');
+const { Classes, SchoolAdmin, Teachers, StudentsClasses, Students } = require('../database/models');
 
 
 class studentServices {
     static async studentsArray(){
         try {
-            const allStudents = await Students.findAll();
+            const allStudents = await Students.findAll(
+                {
+                    // attributes: { exclude: ['createdAt', 'updatedAt'] },
+                    include: [
+                        {
+                            model: SchoolAdmin,
+                            attributes: ['firstname', 'lastname', 'username']
+                        },
+                        {
+                            model: StudentsClasses, include: [{
+                                    model: Classes,
+                                    attributes: ["id", "name", "description"],
+                                    include:[{
+                                        model:Teachers,
+                                        attributes: ['id','firstname', 'lastname']
+                                    }]
+                                }]
+                        }
+                    ]
+                }
+            );
             return allStudents
         } catch (error) {
             throw (error)
@@ -22,7 +43,26 @@ class studentServices {
     
     static async getStudent(id){
         try {
-            const result = await Students.findByPk(id)
+            const result = await Students.findByPk(id,
+                {
+                    // attributes: { exclude: ['createdAt', 'updatedAt'] },
+                    include: [
+                        {
+                            model: SchoolAdmin,
+                            attributes: ['firstname', 'lastname', 'username']
+                        },
+                        {
+                            model: StudentsClasses, include: [{
+                                    model: Classes,
+                                    attributes: ["id", "name", "description"],
+                                    include:[{
+                                        model:Teachers,
+                                        attributes: ['id','firstname', 'lastname']
+                                    }]
+                                }]
+                        }
+                    ]
+                })
             return result
         } catch (error) {
             throw(error)

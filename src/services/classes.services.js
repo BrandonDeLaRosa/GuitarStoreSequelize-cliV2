@@ -1,5 +1,5 @@
-const { Model } = require('sequelize');
-const { Classes, SchoolAdmin,Teachers } = require('../database/models');
+// const { Model } = require('sequelize');
+const { Classes, SchoolAdmin, Teachers, StudentsClasses, Students } = require('../database/models');
 // const schooladmin = require('../database/models/schooladmin');
 
 
@@ -12,11 +12,17 @@ class ClassesServices {
                 include: [
                     {
                         model: SchoolAdmin,
-                        attributes: ['firstname','lastname','username']
+                        attributes: ['firstname', 'lastname', 'username']
                     },
                     {
                         model: Teachers,
                         attributes: ['firstname', 'lastname']
+                    },
+                    {
+                        model: StudentsClasses, include: [{
+                                model: Students,
+                                attributes: ["id", "firstname", "lastname"]
+                            }]
                     }
                 ]
             });
@@ -25,7 +31,7 @@ class ClassesServices {
             throw (error)
         }
     }
-
+    // attributes: ['studentsId','classesId']
 
     static async createNewClass(newClass) {
 
@@ -39,7 +45,26 @@ class ClassesServices {
 
     static async getClass(id) {
         try {
-            const result = await Classes.findByPk(id)
+            const result = await Classes.findByPk(id,
+                {
+                    // attributes: { exclude: ['createdAt', 'updatedAt'] },
+                    include: [
+                        {
+                            model: SchoolAdmin,
+                            attributes: ['firstname', 'lastname', 'username']
+                        },
+                        {
+                            model: Teachers,
+                            attributes: ['firstname', 'lastname']
+                        },
+                        {
+                            model: StudentsClasses, include: [{
+                                    model: Students,
+                                    attributes: ["id", "firstname", "lastname"]
+                                }]
+                        }
+                    ]
+                })
             return result
         } catch (error) {
             throw (error)

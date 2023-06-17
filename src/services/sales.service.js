@@ -1,11 +1,23 @@
-const {Sales, salesproducts} = require('../database/models');
+const {Sales, salesproducts,SchoolAdmin,SalesProducts,Products} = require('../database/models');
 // const salesproducts = require('../database/models/salesproducts');
 
 class SaleServices {
 
     static async getAll(){
         try {
-            const sales = await Sales.findAll();
+            const sales = await Sales.findAll({
+                include: [
+                        {
+                            model: SchoolAdmin,
+                            attributes: ['firstname', 'lastname', 'username']
+                        },
+                        {
+                            model:SalesProducts,include :[{
+                                model:Products,
+                            }]
+                        }
+                    ]
+            });
             return sales
         } catch (error) {
             throw(error)
@@ -24,7 +36,20 @@ class SaleServices {
 
     static async getSale(id){
         try {
-            const result = await Sales.findByPk(id)
+            const result = await Sales.findByPk(id,
+                {
+                    include: [
+                            {
+                                model: SchoolAdmin,
+                                attributes: ['firstname', 'lastname', 'username']
+                            },
+                            {
+                                model:SalesProducts,include :[{
+                                    model:Products,
+                                }]
+                            }
+                        ]
+                })
             return result
         } catch (error) {
             throw(error)
